@@ -10,7 +10,7 @@ A cloud-hosted web app for comparing prices of products identified via image upl
 
 ## Current Status
 - In the planning phase.
-- [View the Presentation](./presentation/Project_Details_Presentation.pdf).
+- [View the Presentation](./DealDetective Kickoff Presentation.pptx).
 
 ## Future Updates
 - Detailed implementation plans and code will be added as development progresses.
