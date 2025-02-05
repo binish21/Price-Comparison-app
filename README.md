@@ -10,7 +10,7 @@ A cloud-hosted web app for comparing prices of products identified via image upl
 
 ## Current Status
 - In the planning phase.
-- [View the Presentation](./DealDetective Kickoff Presentation.pptx).
+- [View the Presentation]([./DealDetective Kickoff Presentation.pptx](https://github.com/binish21/Price-Compression-app/blob/702b68b8923c04b057fc9ca1913dfb960b53d96f/DealDetective%20Kickoff%20Presentation.pptx)).
 
 ## Future Updates
 - Detailed implementation plans and code will be added as development progresses.
