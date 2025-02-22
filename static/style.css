@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.search-box {
+    margin-bottom: 20px;
+}
+
+.detected-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Suggested Purchase Section */
+.suggested-purchase {
+    margin: 20px 0;
+    padding: 20px;
+    background: #e8f5e9; /* Light green background */
+    border-radius: 10px;
+    text-align: center;
+}
+
+.suggested-purchase h2 {
+    color: #2e7d32; /* Dark green text */
+    margin-bottom: 15px;
+}
+
+.suggested-purchase .product-box {
+    margin: 0 auto; /* Center the product box */
+    background: white;
+    border: 2px solid #2e7d32; /* Green border */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Carousel Container */
+.carousel-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-container h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Carousel Styling */
+.carousel {
+    display: flex;
+    gap: 20px;
+}
+
+/* Product Box Styling */
+.product-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 250px;
+    margin: 0 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-box img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-box a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.product-box a:hover {
+    text-decoration: underline;
+}
+
+/* Website Indicator */
+.website-indicator {
+    background: #2e7d32;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
