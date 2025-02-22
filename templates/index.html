@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Comparison App</title>
+    <link rel="stylesheet" href="static/style.css">
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+</head>
+<body>
+
+    <h1>Price Comparison App</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="product_name" placeholder="Enter Product Name">
+        <input type="file" name="file">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if detected_label %}
+        <p class="detected-label">Identified Product: {{ detected_label }}</p>
+    {% endif %}
+
+    <!-- Suggested Purchase Section -->
+    {% if suggested_purchase %}
+        <div class="suggested-purchase">
+            <h2>Suggested Purchase (Cheapest)</h2>
+            <div class="product-box">
+                {% if suggested_purchase.thumbnail %}
+                    <img src="{{ suggested_purchase.thumbnail }}" alt="{{ suggested_purchase.title }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/150" alt="No Image Available">
+                {% endif %}
+                <p><strong>{{ suggested_purchase.title }}</strong></p>
+                <p>Price: {{ suggested_purchase.price }}</p>
+                <p><a href="{{ suggested_purchase.link }}" target="_blank">View Product</a></p>
+            </div>
+        </div>
+        <p class="detected-label">Compare with Amazon.ca, eBay, and BestBuy</p>
+    {% endif %}
+
+    <!-- Carousel Section -->
+    <div class="carousel-container">
+        <h2>Compare Products</h2>
+        <div class="carousel">
+            {% for product in all_products_sorted %}
+                <div class="product-box">
+                    <!-- Website Indicator -->
+                    <div class="website-indicator">{{ product.site }}</div>
+                    <!-- Thumbnail -->
+                    {% if product.thumbnail %}
+                        <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" alt="No Image Available">
+                    {% endif %}
+                    <!-- Product Details -->
+                    <p><strong>{{ product.title }}</strong></p>
+                    <p>Price: {{ product.price }}</p>
+                    <p><a href="{{ product.link }}" target="_blank">View Product</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Slick Carousel JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true, // Show dot indicators
+                infinite: true, // Infinite looping
+                speed: 300, // Transition speed
+                slidesToShow: 3, // Number of slides to show at once
+                slidesToScroll: 1, // Number of slides to scroll
+                responsive: [
+                    {
+                        breakpoint: 768, // Adjust for tablets
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480, // Adjust for mobile
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+</body>
+</html>
