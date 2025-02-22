@@ -1,0 +1,3 @@
+2025-02-22 18:26:01 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-02-22 18:27:12 - Query: ipad 11 pro m2, Detected: None
+2025-02-22 18:37:24 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
