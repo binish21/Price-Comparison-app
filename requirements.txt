@@ -1,0 +1,8 @@
+Flask
+requests
+beautifulsoup4
+google-cloud-vision
+google-auth
+google-auth-oauthlib
+fuzzywuzzy
+python-Levenshtein
