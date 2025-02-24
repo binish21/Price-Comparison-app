@@ -32,7 +32,7 @@ pip install -r requirements.txt
 3. Place it inside the project folder.
 4. Set up environment variable inside Python:
 ```python
-link your api key file with correct path eg : /user/path/to/key.json
+go to the project folder and edit app.py make sure to link your api key file with correct path eg : /user/path/to/key.json
 GOOGLE_APPLICATION_CREDENTIALS = "google_credentials.json"
 ```
 
