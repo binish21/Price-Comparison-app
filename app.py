@@ -9,8 +9,9 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Path to your Google Cloud service account JSON key file
-GOOGLE_CREDENTIALS_PATH = "capstone-450717-5fa7fb8d8005.json"
+# Path to your Google Cloud service account JSON key file make sure to mind with forward slash and backward slash while linking
+#recomended to be in same directory and use '/' insted of '\'
+GOOGLE_CREDENTIALS_PATH = "PATH-TO-JSON-API-FILE.json"
 
 # ✅ Load credentials explicitly
 credentials = service_account.Credentials.from_service_account_file(GOOGLE_CREDENTIALS_PATH)
