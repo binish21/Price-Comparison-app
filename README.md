@@ -9,7 +9,7 @@ It also supports **image-based product recognition** using Google Vision API.
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/binish21/Price-Compression-app.git
+git clone https://github.com/binish21/Price-Comparison-app.git
 cd Price-Comparison-App
 ```
 
@@ -32,8 +32,8 @@ pip install -r requirements.txt
 3. Place it inside the project folder.
 4. Set up environment variable inside Python:
 ```python
-import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_credentials.json"
+link your api key file with correct path eg : /user/path/to/key.json
+GOOGLE_APPLICATION_CREDENTIALS = "google_credentials.json"
 ```
 
 ### 5️⃣ Run the App
