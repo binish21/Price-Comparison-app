@@ -58,42 +58,9 @@ PriceComparisonApp/
 │── .gitignore               # Ignore unnecessary files
 │── README.md                # Documentation for setup
 │── venv/                    # (if using a virtual environment - should be ignored in Git)
-│── google_credentials.json  # Google API key (Optional - should NOT be committed)
+│── google_credentials.json  # Google API key 
 ```
 
 ---
 
-## 🚀 Upload to GitHub
 
-1. **Initialize a Git repository (if not done already):**
-   ```bash
-   git init
-   ```
-2. **Connect to GitHub (Replace with your repo URL):**
-   ```bash
-   git remote add origin https://github.com/your-username/PriceComparisonApp.git
-   ```
-3. **Add and commit your files:**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   ```
-4. **Push the code to GitHub:**
-   ```bash
-   git push origin main
-   ```
-   If `main` branch doesn't exist, use:
-   ```bash
-   git push origin master
-   ```
-
----
-
-## ✅ Summary
-- **Ensure `requirements.txt` is ready.**
-- **Create a `.gitignore` to exclude unnecessary files.**
-- **Add a `README.md` with setup instructions.**
-- **Push to GitHub.**
-- **Users can clone, install dependencies, and run easily.**  
-
-Now your app is **GitHub-ready!** 🚀
