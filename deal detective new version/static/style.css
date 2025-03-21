@@ -1,0 +1,147 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.search-box {
+    margin-bottom: 20px;
+}
+
+.detected-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.suggested-purchase {
+    margin: 20px 0;
+    padding: 20px;
+    background: #e8f5e9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.suggested-purchase h2 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+.suggested-purchase .product-box {
+    margin: 0 auto;
+    background: white;
+    border: 2px solid #2e7d32;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.suggested-purchase .product-box p {
+    margin: 10px 0;
+}
+
+.suggested-purchase .product-box a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.suggested-purchase .product-box a:hover {
+    text-decoration: underline;
+}
+
+.carousel-container {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-container h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+}
+
+.product-box {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 250px;
+    margin: 0 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-box img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-box a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.product-box a:hover {
+    text-decoration: underline;
+}
+
+.website-indicator {
+    background: #2e7d32;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.product-details {
+    margin: 20px 0;
+    padding: 20px;
+    background: #e3f2fd;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.product-details h2 {
+    color: #1976d2;
+    margin-bottom: 15px;
+}
+
+.details-container {
+    background: white;
+    border: 2px solid #1976d2;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

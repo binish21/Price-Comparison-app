@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Comparison App</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: auto; }
+        .search-box { margin-bottom: 20px; }
+        .product-box { 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+            margin: 10px; 
+            display: inline-block; 
+            width: 250px; 
+            vertical-align: top; /* Align product boxes at the top */
+        }
+        .product-box img { 
+            max-width: 100%; 
+            height: auto; 
+            margin-bottom: 10px; 
+        }
+        .product-box a { text-decoration: none; color: blue; }
+        .detected-label { font-size: 18px; font-weight: bold; color: green; }
+        .compare-section { margin-top: 20px; }
+        .compare-section h3 { color: #333; }
+        .compare-section table { width: 100%; border-collapse: collapse; }
+        .compare-section th, .compare-section td { border: 1px solid #ddd; padding: 8px; }
+        .compare-section th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <h1>Price Comparison App</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="product_name" placeholder="Enter Product Name">
+        <input type="file" name="file">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if detected_label %}
+        <p class="detected-label">Google detected: {{ detected_label }}</p>
+    {% endif %}
+
+    <div class="container">
+        {% for title, products in grouped_results.items() %}
+            <div class="compare-section">
+                <h3>{{ title }}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Price</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.platform }}</td>
+                                <td>{{ product.price }}</td>
+                                <td><a href="{{ product.link }}" target="_blank">View Product</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

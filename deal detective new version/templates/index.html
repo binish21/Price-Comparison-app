@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Comparison App</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+</head>
+<body>
+    <h1>Price Comparison App</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="product_name" placeholder="Enter Product Name">
+        <input type="file" name="file">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if detected_label %}
+        <p class="detected-label">Identified Product: {{ detected_label }}</p>
+    {% endif %}
+
+    {% if suggested_purchase %}
+    <div class="suggested-purchase">
+        <h2>Suggested Purchase (Cheapest)</h2>
+        <div class="product-box">
+            {% if suggested_purchase.thumbnail %}
+                <img src="{{ suggested_purchase.thumbnail }}" alt="{{ suggested_purchase.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/150" alt="No Image Available">
+            {% endif %}
+            <p><strong>{{ suggested_purchase.title }}</strong></p>
+            <p>Price: {{ suggested_purchase.price }}</p>
+            <p><strong>Rating:</strong> {{ suggested_purchase.rating }}</p>
+            <p><strong>Reviews:</strong> {{ suggested_purchase.reviews }}</p>
+            <p><a href="{{ suggested_purchase.link }}" target="_blank">View Product</a></p>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="carousel-container">
+        <h2>Compare Products</h2>
+        <div class="carousel">
+            {% for product in all_products_sorted %}
+                <div class="product-box">
+                    <div class="website-indicator">{{ product.site }}</div>
+                    {% if product.thumbnail %}
+                        <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/150" alt="No Image Available">
+                    {% endif %}
+                    <p><strong>{{ product.title }}</strong></p>
+                    <p>Price: {{ product.price }}</p>
+                    <p><a href="{{ product.link }}" target="_blank">View Product</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
