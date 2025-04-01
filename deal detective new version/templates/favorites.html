@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorites - PriceHunter</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1><i class="fas fa-heart"></i> Your Favorites</h1>
+                <p class="tagline">Your saved products</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="back-button">
+                <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Search</a>
+            </div>
+
+            {% if favorites %}
+            <section class="comparison-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bookmark"></i> Saved Items ({{ favorites|length }})</h2>
+                </div>
+                <div class="comparison-grid">
+                    {% for product in favorites %}
+                        <div class="product-card">
+                            <div class="card-header">
+                                <span class="retailer-tag {{ product.site|lower if product.site else 'amazon' }}">
+                                    {{ product.site if product.site else 'Amazon' }}
+                                </span>
+                                {% if product.thumbnail %}
+                                    <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image Available">
+                                {% endif %}
+                                <button class="favorite-btn active" data-link="{{ product.link }}">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ product.title }}</h3>
+                                <div class="price">{{ product.price }}</div>
+                                {% if product.rating %}
+                                <div class="rating">
+                                    <div class="stars">
+                                        {% set rating_num = product.rating.split(' ')[0] if ' ' in product.rating else 0 %}
+                                        {% for i in range(5) %}
+                                            <i class="fas fa-star{% if i >= rating_num|float %}-half-alt{% endif %}"></i>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ product.link }}" target="_blank" class="view-button">
+                                    View Deal <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% else %}
+            <section class="empty-state">
+                <div class="empty-icon">
+                    <i class="far fa-heart"></i>
+                </div>
+                <h3>No favorites yet</h3>
+                <p>Save products by clicking the heart icon when searching</p>
+                <a href="/" class="search-link">Start Searching</a>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer class="app-footer">
+            <p>© 2023 PriceHunter. Compare prices from Amazon, eBay, and BestBuy.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Remove favorite
+            $('.favorite-btn').on('click', function() {
+                const productLink = $(this).data('link');
+                const $card = $(this).closest('.product-card');
+                
+                $.ajax({
+                    url: '/remove_favorite',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ link: productLink }),
+                    success: function() {
+                        $card.fadeOut(300, function() {
+                            $(this).remove();
+                            // Reload if no favorites left
+                            if ($('.product-card').length === 0) {
+                                location.reload();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

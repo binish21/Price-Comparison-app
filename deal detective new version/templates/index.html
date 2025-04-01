@@ -3,57 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Comparison App</title>
+    <title>Deal Detective - Find the Best Deals</title>
     <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <body>
-    <h1>Price Comparison App</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="text" name="product_name" placeholder="Enter Product Name">
-        <input type="file" name="file">
-        <button type="submit">Search</button>
-    </form>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1><i class="fas fa-search-dollar"></i> DealDetective</h1>
+                <p class="tagline">Find the best deals across top retailers</p>
+            </div>
+            <nav class="main-nav">
+                <a href="/" class="nav-link"><i class="fas fa-search"></i> Search</a>
+                <a href="/favorites" class="nav-link"><i class="fas fa-heart"></i> Favorites</a>
+            </nav>
+        </header>
 
-    {% if detected_label %}
-        <p class="detected-label">Identified Product: {{ detected_label }}</p>
-    {% endif %}
+        <main class="main-content">
+            <section class="search-section">
+                <form method="POST" enctype="multipart/form-data" class="search-form">
+                    <div class="input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" name="product_name" placeholder="Enter Product Name" value="{{ detected_label if detected_label else '' }}">
+                    </div>
+                    <div class="file-upload">
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fas fa-camera"></i> Upload Image
+                        </label>
+                        <input id="file-upload" type="file" name="file">
+                    </div>
+                    <button type="submit" class="search-button">Search <i class="fas fa-arrow-right"></i></button>
+                </form>
 
-    {% if suggested_purchase %}
-    <div class="suggested-purchase">
-        <h2>Suggested Purchase (Cheapest)</h2>
-        <div class="product-box">
-            {% if suggested_purchase.thumbnail %}
-                <img src="{{ suggested_purchase.thumbnail }}" alt="{{ suggested_purchase.title }}">
-            {% else %}
-                <img src="https://via.placeholder.com/150" alt="No Image Available">
-            {% endif %}
-            <p><strong>{{ suggested_purchase.title }}</strong></p>
-            <p>Price: {{ suggested_purchase.price }}</p>
-            <p><strong>Rating:</strong> {{ suggested_purchase.rating }}</p>
-            <p><strong>Reviews:</strong> {{ suggested_purchase.reviews }}</p>
-            <p><a href="{{ suggested_purchase.link }}" target="_blank">View Product</a></p>
-        </div>
-    </div>
-    {% endif %}
+                {% if error_message %}
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+                    </div>
+                {% endif %}
 
-    <div class="carousel-container">
-        <h2>Compare Products</h2>
-        <div class="carousel">
-            {% for product in all_products_sorted %}
-                <div class="product-box">
-                    <div class="website-indicator">{{ product.site }}</div>
-                    {% if product.thumbnail %}
-                        <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
-                    {% else %}
-                        <img src="https://via.placeholder.com/150" alt="No Image Available">
-                    {% endif %}
-                    <p><strong>{{ product.title }}</strong></p>
-                    <p>Price: {{ product.price }}</p>
-                    <p><a href="{{ product.link }}" target="_blank">View Product</a></p>
+                {% if detected_label and not error_message %}
+                    <div class="detection-banner">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Identified Product: <strong>{{ detected_label }}</strong></p>
+                    </div>
+                {% endif %}
+            </section>
+
+            {% if suggested_purchase %}
+            <section class="best-deal-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-crown"></i> Best Deal Found</h2>
+                    <div class="price-badge">
+                        <span class="currency">$</span>
+                        <span class="amount">{{ suggested_purchase.price.replace('$', '').replace('C $', '').split('.')[0] }}</span>
+                        <span class="cents">.{{ suggested_purchase.price.split('.')[1] if '.' in suggested_purchase.price else '00' }}</span>
+                    </div>
                 </div>
-            {% endfor %}
+                <div class="best-deal-card">
+                    <div class="deal-image">
+                        {% if suggested_purchase.thumbnail %}
+                            <img src="{{ suggested_purchase.thumbnail }}" alt="{{ suggested_purchase.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200?text=No+Image" alt="No Image Available">
+                        {% endif %}
+                        <button class="favorite-btn" 
+                                data-link="{{ suggested_purchase.link }}"
+                                data-title="{{ suggested_purchase.title }}"
+                                data-price="{{ suggested_purchase.price }}"
+                                {% if suggested_purchase.thumbnail %}data-thumbnail="{{ suggested_purchase.thumbnail }}"{% endif %}
+                                {% if suggested_purchase.site %}data-site="{{ suggested_purchase.site }}"{% endif %}>
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="deal-details">
+                        <h3>{{ suggested_purchase.title }}</h3>
+                        <div class="deal-meta">
+                            <div class="rating">
+                                <div class="stars">
+                                    {% if suggested_purchase.rating %}
+                                        {% set rating_num = suggested_purchase.rating.split(' ')[0] %}
+                                        {% for i in range(1, 6) %}
+                                            <i class="fas fa-star{% if i > rating_num|float %}-half-alt{% endif %}"></i>
+                                        {% endfor %}
+                                    {% else %}
+                                        <i class="fas fa-star-half-alt"></i> No rating
+                                    {% endif %}
+                                </div>
+                                <span>{{ suggested_purchase.reviews if suggested_purchase.reviews else 'No reviews' }}</span>
+                            </div>
+                            <div class="retailer">
+                                <i class="fas fa-store"></i> {{ suggested_purchase.site if suggested_purchase.site else 'Unknown retailer' }}
+                            </div>
+                        </div>
+                        <p class="description">{{ suggested_purchase.description if suggested_purchase.description else 'No description available' }}</p>
+                        <a href="{{ suggested_purchase.link }}" target="_blank" class="view-button">
+                            View on {{ suggested_purchase.site if suggested_purchase.site else 'Retailer' }} <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+           
+
+            {% if all_products_sorted %}
+            <section class="comparison-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-balance-scale"></i> Compare Prices</h2>
+                    <div class="sort-options">
+                        <span>Sort by:</span>
+                        <button class="sort-btn active" data-sort="price">Price</button>
+                        <button class="sort-btn" data-sort="rating">Rating</button>
+                    </div>
+                </div>
+                <div class="comparison-grid">
+                    {% for product in all_products_sorted %}
+                        <div class="product-card" data-price="{{ product.price_clean }}" 
+                             data-rating="{{ product.rating.split(' ')[0] if product.rating and ' ' in product.rating else 0 }}">
+                            <div class="card-header">
+                                <span class="retailer-tag {{ product.site|lower if product.site else 'amazon' }}">
+                                    {{ product.site if product.site else 'Amazon' }}
+                                </span>
+                                {% if product.thumbnail %}
+                                    <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/200x150?text=No+Image" alt="No Image Available">
+                                {% endif %}
+                                <button class="favorite-btn" 
+                                        data-link="{{ product.link }}"
+                                        data-title="{{ product.title }}"
+                                        data-price="{{ product.price }}"
+                                        {% if product.thumbnail %}data-thumbnail="{{ product.thumbnail }}"{% endif %}
+                                        {% if product.site %}data-site="{{ product.site }}"{% endif %}>
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h3>{{ product.title }}</h3>
+                                <div class="price">{{ product.price }}</div>
+                                {% if product.rating %}
+                                <div class="rating">
+                                    <div class="stars">
+                                        {% set rating_num = product.rating.split(' ')[0] if ' ' in product.rating else 0 %}
+                                        {% for i in range(1, 6) %}
+                                            <i class="fas fa-star{% if i > rating_num|float %}-half-alt{% endif %}"></i>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ product.link }}" target="_blank" class="view-button">
+                                    View Deal <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer class="app-footer">
+            <p>© 2023 Deal Detective. Compare prices from Amazon, eBay, and BestBuy.</p>
+        </footer>
+    </div>
+
+    <div class="loader-overlay">
+        <div class="loader-box">
+            <div class="spinner"></div>
+            <p>Searching for the best deals...</p>
         </div>
     </div>
 
@@ -61,6 +183,74 @@
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $(document).ready(function(){
+            // Show loader when form is submitted
+            $('.search-form').on('submit', function() {
+                $('.loader-overlay').fadeIn();
+            });
+
+            // Initialize favorite buttons
+            function initializeFavorites() {
+                const favorites = {{ favorites|tojson|safe if favorites else '[]' }};
+                
+                $('.favorite-btn').each(function() {
+                    const $btn = $(this);
+                    const link = $btn.data('link');
+                    
+                    if (favorites.some(fav => fav.link === link)) {
+                        $btn.addClass('active').html('<i class="fas fa-heart"></i>');
+                    }
+                });
+            }
+
+            // Favorite button click handler
+            $(document).on('click', '.favorite-btn', function(e) {
+                e.preventDefault();
+                const $btn = $(this);
+                const isActive = $btn.hasClass('active');
+                
+                const productData = {
+                    title: $btn.data('title'),
+                    price: $btn.data('price'),
+                    link: $btn.data('link'),
+                    thumbnail: $btn.data('thumbnail'),
+                    site: $btn.data('site'),
+                    rating: $btn.closest('.product-card, .best-deal-card').find('.stars').text().trim() || '',
+                    reviews: $btn.closest('.product-card, .best-deal-card').find('.rating span').text().trim() || ''
+                };
+
+                $.ajax({
+                    url: isActive ? '/remove_favorite' : '/add_favorite',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(isActive ? { link: productData.link } : productData),
+                    success: function() {
+                        $btn.toggleClass('active')
+                            .html(isActive ? '<i class="far fa-heart"></i>' : '<i class="fas fa-heart"></i>');
+                    },
+                    error: function() {
+                        alert('Failed to update favorites. Please try again.');
+                    }
+                });
+            });
+
+            // Sort functionality
+            $('.sort-btn').on('click', function() {
+                $('.sort-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                const sortBy = $(this).data('sort');
+                const $grid = $('.comparison-grid');
+                const $items = $grid.find('.product-card');
+                
+                $items.sort(function(a, b) {
+                    const aVal = parseFloat($(a).data(sortBy)) || 0;
+                    const bVal = parseFloat($(b).data(sortBy)) || 0;
+                    return sortBy === 'price' ? aVal - bVal : bVal - aVal;
+                }).appendTo($grid);
+            });
+
+            // Initialize favorites and carousel
+            initializeFavorites();
             $('.carousel').slick({
                 dots: true,
                 infinite: true,
@@ -69,14 +259,14 @@
                 slidesToScroll: 1,
                 responsive: [
                     {
-                        breakpoint: 768,
+                        breakpoint: 1024,
                         settings: {
                             slidesToShow: 2,
                             slidesToScroll: 1
                         }
                     },
                     {
-                        breakpoint: 480,
+                        breakpoint: 600,
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1

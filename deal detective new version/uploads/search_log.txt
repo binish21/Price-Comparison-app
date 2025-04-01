@@ -1,0 +1,70 @@
+2025-03-21 09:19:04 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-21 09:20:24 - Query: Samsung Galaxy Tab S10 Ultra, Detected: Samsung Galaxy Tab S10 Ultra
+2025-03-28 13:14:43 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 13:35:17 - Query: Samsung Galaxy Tab S10 Ultra, Detected: Samsung Galaxy Tab S10 Ultra
+2025-03-28 13:40:10 - Query: Sony PlayStation 5 Slim, Detected: Sony PlayStation 5 Slim
+2025-03-28 13:40:40 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 13:42:31 - Query: Iphone 14 pro max, Detected: None
+2025-03-28 13:59:44 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 14:04:30 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 14:05:02 - Query: iphone 14 pro, Detected: None
+2025-03-28 14:09:02 - Query: iphone 15 pro max, Detected: None
+2025-03-28 14:09:51 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 14:11:59 - Query: apple watch series 5, Detected: None
+2025-03-28 14:18:28 - Query: Galaxy S24 Ultra 1TB - Preto + Galaxy Watch6 Classic Lte 43mm - Prata + Galaxy Buds FE - Grafite - Combo, Detected: Galaxy S24 Ultra 1TB - Preto + Galaxy Watch6 Classic Lte 43mm - Prata + Galaxy Buds FE - Grafite - Combo
+2025-03-28 14:19:00 - Query: Galaxy S24 Ultra 1TB - Preto + Galaxy Watch6 Classic Lte 43mm - Prata + Galaxy Buds FE - Grafite - Combo, Detected: None
+2025-03-28 14:20:03 - Query: Apple AirPods Pro (2nd Generation), Detected: Apple AirPods Pro (2nd Generation)
+2025-03-28 14:26:35 - Query: Apple iPad Air (M2, 2024), Detected: Apple iPad Air (M2, 2024)
+2025-03-28 14:27:15 - Query: Apple iPad air 11, Detected: None
+2025-03-28 14:28:37 - Query: Apple AirPods Pro (2nd Generation) with USB-C Charging Case (Renewed), Detected: None
+2025-03-28 14:28:57 - Query: Apple AirPods Pro (2nd Generation) , Detected: None
+2025-03-28 14:31:57 - Query: soundcore Life Q30 by Anker, Detected: None
+2025-03-28 14:32:49 - Query: AG Care Fast Food Leave On Conditioner, Detected: None
+2025-03-28 14:35:02 - Query: Ralph Lauren - Polo Blue, Detected: None
+2025-03-28 14:36:23 - Query: Logitech Brio 101 Full HD 1080p Webcam for Meetings, Detected: None
+2025-03-28 14:37:22 - Query: European shorthair, Detected: European shorthair
+2025-03-28 14:38:01 - Query: European shorthair, Detected: None
+2025-03-28 14:38:32 - Query: Changpeng Zhao, Detected: Changpeng Zhao
+2025-03-28 15:02:55 - Query: Apple iPhone 14 Plus, 128GB, Detected: None
+2025-03-28 15:05:43 - Query: Apple iPhone 14 Plus, 128GB,, Detected: None
+2025-03-28 15:09:10 - Query: Apple iPhone 14 Plus, 128GB,, Detected: None
+2025-03-28 15:28:14 - Query: apple macbook pro , Detected: None
+2025-03-28 15:34:07 - Query: apple macbook pro m2, Detected: None
+2025-03-28 15:34:47 - Query: Apple 2024 Mac Mini Apple M4 Pro, Detected: None
+2025-03-28 15:40:02 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 15:41:34 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 15:45:36 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 15:45:50 - Query: apple mac mini, Detected: None
+2025-03-28 15:46:08 - Query: Apple iPhone 14 Plus, 128GB,, Detected: None
+2025-03-28 15:46:27 - Query: Apple iPhone 14 Plus, Detected: None
+2025-03-28 15:50:49 - Query: iphone 13 pro, Detected: None
+2025-03-28 15:51:15 - Query: iphone 15 pro max, Detected: None
+2025-03-28 15:52:17 - Query: iphone 15 pro max 256 gb, Detected: None
+2025-03-28 15:52:47 - Query: TCL 75" S-Series 4K UHD HDR LED Roku OS Smart TV, Detected: None
+2025-03-28 15:53:18 - Query: Dyson V15 Detect Extra Cordless best buy, Detected: None
+2025-03-28 15:54:22 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 15:56:54 - Query: iphone 13 pro, Detected: None
+2025-03-28 15:57:17 - Query: iphone 13 pro, Detected: None
+2025-03-28 15:58:48 - Query: iphone 13 pro, Detected: None
+2025-03-28 15:59:32 - Query: ASUS Vivobook S 16 Oled Business Laptop, Detected: ASUS Vivobook S 16 Oled Business Laptop
+2025-03-28 16:00:17 - Query: ASUS Vivobook S 16 Oled Business Laptop, Detected: ASUS Vivobook S 16 Oled Business Laptop
+2025-03-28 16:01:58 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 16:03:08 - Query: Asus Vivobook S 16 Flip Laptop, Detected: None
+2025-03-28 16:03:45 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 16:04:45 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: None
+2025-03-28 16:05:22 - Query: Apple iPhone 13 Mini, Detected: Apple iPhone 13 Mini
+2025-03-28 16:06:08 - Query: Apple iPhone 13 Mini, Detected: None
+2025-03-28 16:06:44 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 16:07:10 - Query: Asus Vivobook S 16 Flip Laptop, Detected: None
+2025-03-28 16:09:54 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 16:10:26 - Query: Asus Vivobook S 16 Flip Laptop, Detected: None
+2025-03-28 16:12:51 - Query: iphone 14 pro, Detected: None
+2025-03-28 16:13:25 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 16:13:59 - Query: Asus Vivobook S 16 Flip Laptop, Detected: None
+2025-03-28 16:14:34 - Query: JBL Go 4 Portable Bluetooth Speaker, Detected: JBL Go 4 Portable Bluetooth Speaker
+2025-03-28 16:15:13 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 16:15:37 - Query: apple airpods pro 2, Detected: None
+2025-03-28 16:16:08 - Query: Sony PlayStation 5 Slim, Detected: Sony PlayStation 5 Slim
+2025-03-28 21:37:12 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop
+2025-03-28 21:50:35 - Query: apple airpods 4, Detected: None
+2025-03-31 19:57:58 - Query: Asus Vivobook S 16 Flip Laptop, Detected: Asus Vivobook S 16 Flip Laptop

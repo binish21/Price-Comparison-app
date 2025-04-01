@@ -48,24 +48,62 @@ def fetch_product_details(url, selectors):
         return {"error": f"Error fetching data: {e}"}
 
 def get_amazon_product_details(url):
-    selectors = {
-        "title": "#productTitle",
-        "price": ".a-price .a-offscreen",
-        "description": "#productDescription",
-        "rating": ".a-icon-star .a-icon-alt",
-        "reviews": "#acrCustomerReviewText"
-    }
-    return fetch_product_details(url, selectors)
+    try:
+        response = requests.get(url, headers=HEADERS)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Try multiple rating selectors
+        rating_selectors = [
+            'i.a-icon-star span.a-icon-alt',  # New Amazon format
+            '.a-icon-star .a-icon-alt',      # Old format
+            '#acrPopover'                    # Alternative
+        ]
+        
+        rating = "No rating"
+        for selector in rating_selectors:
+            rating_element = soup.select_one(selector)
+            if rating_element:
+                rating = rating_element.get_text(strip=True)
+                break
+        
+        return {
+            "title": soup.select_one("#productTitle").get_text(strip=True) if soup.select_one("#productTitle") else "No title",
+            "price": soup.select_one(".a-price .a-offscreen").get_text(strip=True) if soup.select_one(".a-price .a-offscreen") else "No price",
+            "description": soup.select_one("#productDescription").get_text(strip=True) if soup.select_one("#productDescription") else "No description",
+            "rating": rating,
+            "reviews": soup.select_one("#acrCustomerReviewText").get_text(strip=True) if soup.select_one("#acrCustomerReviewText") else "No reviews"
+        }
+    except Exception as e:
+        print(f"Error fetching Amazon details: {e}")
+        return {
+            "title": "Error loading product",
+            "price": "N/A",
+            "description": "Could not load details",
+            "rating": "No rating",
+            "reviews": "No reviews"
+        }
 
 def get_bestbuy_product_details(url):
-    selectors = {
-        "title": ".sku-title",
-        "price": ".priceView-hero-price .priceView-customer-price",
-        "description": ".product-description",
-        "rating": ".c-ratings-reviews .ugc-ratings-reviews",
-        "reviews": ".c-ratings-reviews .ugc-ratings-reviews"
-    }
-    return fetch_product_details(url, selectors)
+    try:
+        response = requests.get(url, headers=HEADERS)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        return {
+            "title": soup.select_one(".sku-title").get_text(strip=True) if soup.select_one(".sku-title") else "No title",
+            "price": soup.select_one(".priceView-hero-price .priceView-customer-price").get_text(strip=True) if soup.select_one(".priceView-hero-price .priceView-customer-price") else "No price",
+            "description": soup.select_one(".product-description").get_text(strip=True) if soup.select_one(".product-description") else "No description",
+            "rating": soup.select_one(".c-ratings-reviews .ugc-ratings-reviews").get_text(strip=True) if soup.select_one(".c-ratings-reviews .ugc-ratings-reviews") else "No rating",
+            "reviews": soup.select_one(".c-ratings-reviews .ugc-ratings-reviews").get_text(strip=True) if soup.select_one(".c-ratings-reviews .ugc-ratings-reviews") else "No reviews"
+        }
+    except Exception as e:
+        print(f"Error fetching BestBuy details: {e}")
+        return {
+            "title": "Error loading product",
+            "price": "N/A",
+            "description": "Could not load details",
+            "rating": "No rating",
+            "reviews": "No reviews"
+        }
 
 def get_ebay_product_details(url):
     selectors = {
@@ -81,43 +119,33 @@ def search_amazon(query):
     url = f"https://www.amazon.ca/s?k={query.replace(' ', '+')}"
     try:
         response = requests.get(url, headers=HEADERS)
-        response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
         results = []
-
-         
-        for product in soup.find_all("div", attrs={"data-component-type": "s-search-result"})[:5]:
-            link_element = product.find("a", class_="a-link-normal")
-            link = "https://www.amazon.ca" + link_element["href"] if link_element else None
-            price_element = product.find("span", class_="a-price-whole")
-            decimal_price_element = product.find("span", class_="a-price-symbol")
-            price = f"{price_element.text.strip()}{decimal_price_element.text.strip()}" if price_element and decimal_price_element else None
-            thumbnail_element = product.find("img", class_="s-image")
-            thumbnail = thumbnail_element["src"] if thumbnail_element else None
-            product_title = get_amazon_product_title(link) if link else "No title found"
-            # Get the embedding for the product title
-            
-
-            # Compute cosine similarity between the query and product title
-            similarity_score = fuzz.token_sort_ratio(query.lower(), product_title.lower())
-
-            # Use a threshold (e.g., 0.7) to filter results
-            if similarity_score >= 0.7:
-                results.append({
-                    "title": product_title,
-                    "link": link,
-                    "price": price,
-                    "thumbnail": thumbnail,
-                    "score": similarity_score
-                })
-
-        # Sort results by similarity score (descending)
-        print("amazon result",results)
-        results.sort(key=lambda x: x["score"], reverse=True)
         
-        return results[:2]  # Return only the top 3 most relevant items
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data from Amazon CA: {e}")
+        for product in soup.find_all("div", attrs={"data-component-type": "s-search-result"})[:5]:
+            try:
+                link = "https://www.amazon.ca" + product.find("a", class_="a-link-normal")["href"]
+                title = get_amazon_product_title(link) if link else "No title found"
+                
+                # Get rating from search results if available
+                rating_element = product.find("span", class_="a-icon-alt")
+                rating = rating_element.get_text(strip=True) if rating_element else "No rating"
+                
+                results.append({
+                    "title": title,
+                    "link": link,
+                    "price": product.find("span", class_="a-price-whole").get_text(strip=True) + product.find("span", class_="a-price-fraction").get_text(strip=True),
+                    "thumbnail": product.find("img", class_="s-image")["src"],
+                    "rating": rating,
+                    "site": "Amazon"
+                })
+            except Exception as e:
+                print(f"Error processing Amazon product: {e}")
+                continue
+        
+        return results[:3]
+    except Exception as e:
+        print(f"Error searching Amazon: {e}")
         return []
 
 def search_ebay(query):
